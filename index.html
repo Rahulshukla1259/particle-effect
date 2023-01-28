@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cnavas</title>
+</head>
+<body>
+    <canvas id="canvas">
+
+        <h1 style="color: azure;">hi rahul</h1>
+    </canvas>
+
+
+</body>
+<style>
+    body{
+        margin: 0;
+
+        box-sizing: border-box;
+    }
+</style>
+<script>
+    let canvas=document.getElementById("canvas")
+
+    canvas.style.background="rgb(0,0,0)"
+
+    let ctx=canvas.getContext("2d")
+
+    canvas.width=window.innerWidth
+
+    canvas.height=window.innerHeight
+
+    console.log(ctx)
+
+    let l=0  ,k=0,m=0
+
+    
+
+//     function animate(x,y){
+        
+        
+//         ctx.beginPath()
+
+//         ctx.fillStyle="blue"
+
+//     ctx.strokeStyle="green"
+
+//     ctx.lineWidth=16
+
+    
+
+//     ctx.arc(x,y,30,0,Math.PI*2)
+
+//     ctx.stroke()
+
+//     ctx.fill()
+
+
+
+//    // requestAnimationFrame(animate(x,y))
+
+
+//     }
+
+    
+
+    window.addEventListener("mousemove",(e)=>{
+
+        x=e.clientX-canvas.offsetLeft
+        y=e.clientY-canvas.offsetTop
+
+        
+       
+    
+
+//ctx.clearRect(0,0,canvas.width,canvas.height)     
+})
+
+let particleArray=[]
+
+
+class particle {
+
+    constructor(){
+
+        this.x=X
+        this.y=Y
+        this.size=Math.random()*20+1
+        this.speedX=Math.random()*6-3
+        this.speedY=Math.random()*6-3
+
+    }
+
+    update(){
+
+        this.x+=this.speedX
+
+        this.y+=this.speedY
+
+        if(this.size>1) this.size-=0.1
+    }
+
+    draw(){
+            ctx.beginPath()
+
+            //`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)`
+
+         ctx.fillStyle=`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)`
+
+     
+
+    ctx.lineWidth=1
+
+    
+
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2)
+
+   
+
+   ctx.fill()
+
+    }
+
+
+}
+
+function init(){
+
+    for(let i=0;i<300;i++){
+
+        
+    }
+}
+
+init();
+
+function handleparticle(){
+
+    for(let i=0;i<particleArray.length;i++){
+
+        particleArray[i].update();
+
+        particleArray[i].draw();
+
+        for(let j=i;j<particleArray.length;j++){
+
+            let dx=particleArray[i].x-particleArray[j].x
+            let dy=particleArray[i].y-particleArray[j].y
+
+           
+
+            let d=Math.sqrt(dx*dx+dy*dy)
+
+           
+
+            if(d<70){
+
+                ctx.beginPath()
+
+                //`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)`
+
+
+                ctx.strokeStyle=`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)`
+
+                ctx.moveTo(particleArray[i].x,particleArray[i].y)
+
+                ctx.lineTo(particleArray[j].x,particleArray[j].y)
+
+                ctx.stroke()
+            }
+        }
+
+        
+
+        
+    }
+
+    
+}
+
+(function  animate(){
+
+    
+ctx.clearRect(0,0,canvas.width,canvas.height)
+    handleparticle()
+
+    
+
+    requestAnimationFrame(animate)
+    
+})()
+
+
+window.addEventListener("mousemove",(mouse)=>{
+
+    X=mouse.clientX
+    Y=mouse.clientY
+
+    
+
+        
+
+    for(let i=0;i<3;i++){
+
+        
+        particleArray.push(new particle)
+        
+
+    }
+
+//     ctx.fillStyle="white"
+
+// ctx.fillText("rahul",30,30,50,50)
+
+// ctx.fill()
+})
+
+
+
+
+
+
+
+
+
+console.log(ctx)
+
+</script>
+</html>
